@@ -14,8 +14,8 @@ protected:
 	float _GPA;
 
 private:
-	void InPutValue(int &);
-	void InPutValue(string &);
+	void InPutValue(int&);
+	void InPutValue(string&);
 
 public:
 	/* 실습#7 요구함수 */

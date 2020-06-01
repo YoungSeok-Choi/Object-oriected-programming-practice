@@ -1,76 +1,79 @@
 #include "Student.h"
 
 /*
-실습#7 
+실습#7
 함수 정의
 */
 int Student::stnum = 0;
 
 /* privates */
-void Student::InPutValue(int & i)
-	{
-		int temp;
-		cin >> temp;
-		i = temp;
-	}
+void Student::InPutValue(int& i)
+{
+	int temp;
+	cin >> temp;
+	i = temp;
+}
 
-void Student::InPutValue(string & temp)
-	{
-		getline(cin, temp);
-	}
+void Student::InPutValue(string& temp)
+{
+	getline(cin, temp);
+}
 
 /* publics */
 void Student::InPutData()
+{
+	int i;
+	string tmp;
+	int hak, sub;
+
+	Student::stnum++;
+
+	cout << "\n* " << Student::stnum << " 번째 학생 이름과 과목수를 입력하세요.\n";
+	cout << "이름 : ";
+	InPutValue(tmp);
+	_StdName = tmp;
+
+	cout << "학번 : ";
+	InPutValue(hak);
+	_Hakbun = hak;
+
+	cout << "과목수 : ";
+	InPutValue(sub);
+	_SubNum = sub;
+	_Sub = new Subject[sub];
+	cin.ignore();
+
+	cout << "\n* 수강한 과목 " << _SubNum << "개의 각 교과목명, 과목등급을 입력하세요.\n";
+	for (i = 0; i < Student::_SubNum; i++)
+		_Sub[i].InPutData();
+
+	_AveGPA = CalcAveGPA();
+}
+
+void Student::PrintData() const
+{
+	int i;
+
+	cout << "====================================================\n";
+	cout << "이름 : " << _StdName << "  학번 : " << _Hakbun;
+	cout << "\n====================================================\n";
+	cout << "과목명     과목학점     과목등급     과목평점\n";
+	cout << "====================================================\n";
+
+	cout.precision(2);
+	cout << fixed;
+
+	for (i = 0; i < _SubNum; i++)
 	{
-		int i;
-		string tmp;
-		int hak, sub;
-
-		Student::stnum++;
-
-		cout << "\n* " << Student::stnum << " 번째 학생 이름과 과목수를 입력하세요.\n";
-		cout << "이름 : ";
-		InPutValue(tmp);
-		_StdName = tmp;
-
-		cout << "학번 : ";
-		InPutValue(hak);
-		_Hakbun = hak;
-
-		cout << "과목수 : ";
-		InPutValue(sub);
-		_SubNum = sub;
-		_Sub = new Subject[sub];
-		cin.ignore();
-
-		cout << "\n* 수강한 과목 " << _SubNum << "개의 각 교과목명, 과목등급을 입력하세요.\n";
-		for (i = 0; i < Student::_SubNum; i++)
-			_Sub[i].InPutData();
-
-		_AveGPA = CalcAveGPA();
+		_Sub[i].PrintData();
+		cout << "\n";
 	}
 
-void Student :: PrintData() const
-	{
-		int i;
 
-		cout << "====================================================\n";
-		cout << "이름 : " << _StdName << "  학번 : " << _Hakbun;
-		cout << "\n====================================================\n";
-		cout << "과목명     과목학점     과목등급     과목평점\n";
-		cout << "====================================================\n";
-
-		for (i = 0; i < _SubNum; i++)
-		{
-			_Sub[i].PrintData();
-			cout << "\n";
-		}
-			
-			
-		cout << "====================================================\n";
-		cout << "\t\t\t\t 평균평점 : " << _AveGPA;
-		cout << "\n\n\n";
-	}
+	cout << "====================================================\n";
+	cout << "\t\t\t\t 평균평점 : " << _AveGPA;
+	cout << "\n\n\n";
+}
 
 float Student::CalcAveGPA()
 {
@@ -103,9 +106,8 @@ Student::Student()
 
 Student::~Student()
 {
-		delete[] _Sub;
+	delete[] _Sub;
 }
-// 일단 완료이지만? 전혀 확실하지 않음....
 
 void Student::Modify()
 {
@@ -136,7 +138,7 @@ void Student::Modify()
 		else
 		{
 			temp->Modify();
-			CalcAveGPA();
+			_AveGPA = CalcAveGPA();
 			return;
 		}
 	}

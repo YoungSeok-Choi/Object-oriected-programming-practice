@@ -1,48 +1,51 @@
 #include "Student.h"
 
 
-	/*
-	privates
-	*/
-	void Subject::InPutValue(string & temp)
+
+/*
+실습#7
+함수 정의
+*/
+	
+	/* privates */	
+void Subject::InPutValue(string & temp)
 	{
 		getline(cin, temp);
 	}
 
-	void Subject::InPutValue(int & i)
+void Subject::InPutValue(int & i)
 	{
 		int temp;
 		cin >> temp;
 		i = temp;
 	}
-	
 
-	/*
-	publics
-	*/
-	void  Subject::InPutData()
+	/* publics */
+void  Subject::InPutData()
 	{
 		string sub, grade;
 		int hakjum;
 
 		cout << "교과목명 : ";
 		InPutValue(sub);
+		_SubName = sub;
 		cout << "과목학점수 : ";
 		InPutValue(hakjum);
+		_Hakjum = hakjum;
 		cin.ignore();
 		cout << "과목등급(A+ ~ F) : ";
 		InPutValue(grade);
-		Subject::Initialize(sub, hakjum, grade);
+		_Grade = grade;
 		CalcGPA();
 		cout << "\n\n";
 	}
 
-	void  Subject::PrintData() const
+void  Subject::PrintData() const
 	{
 		cout << _SubName << "\t\t" << _Hakjum << "\t\t" << _Grade << "\t\t" << _GPA;
 	}
 
-	void  Subject::CalcGPA()
+void  Subject::CalcGPA()
 	{
 		string gde[20] = { "A+", "a+", "A0", "a0", "B+",
 					 "b+", "B0", "b0", "C+", "c+",
@@ -83,26 +86,45 @@
 		}
 	}
 
-	float Subject::GetGPA()
+float Subject::GetGPA()
 	{
 		return _GPA;
 	}
     
-	void Subject::Initialize(string subn, int hak, string grad)
-	{
-		Subject::_SubName = subn;
-		Subject::_Hakjum = hak;
-		Subject::_Grade = grad;
-	}
+/*
+실습#8
+함수 정의
+*/
 
-	void Subject::Initialize()
-	{
-		string Dfault = "국어";
-		int hak = 3;
-		string grade = "A0";
+	/* publics */
+Subject::Subject()
+{
+	_SubName = "국어";
+	_Hakjum = 3;
+	_Grade = "A";
+}
 
-		Subject::_SubName = Dfault;
-		Subject::_Hakjum = hak;
-		Subject::_Grade = grade;
-	}
+void Subject::Modify()
+{
+	string sub, grade;
+	int hakjum;
 
+	cout << "\n* ( " << _SubName << ", 학점 : " << _Hakjum << ", 등급 : " << _Grade << ")의 정보를 수정하세요\n";
+	cout << "교과목명 : ";
+	InPutValue(sub);
+	_SubName = sub;
+	cout << "과목학점 : ";
+	InPutValue(hakjum);
+	_Hakjum = hakjum;
+	cout << "과목등급 : ";
+	cin.ignore();
+	InPutValue(grade);
+	_Grade = grade;
+	CalcGPA();
+	cout << "\n\n";
+}
+
+string Subject::GetSubName()
+{
+	return _SubName;
+}

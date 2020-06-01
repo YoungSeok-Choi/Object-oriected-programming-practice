@@ -51,7 +51,7 @@ int main()
 			{
 				Modify(temp, stdnum); // int 매개변수가 왜 넘어가는지 잘 이해가 안됌.
 				continue;
-			}	
+			}
 			else
 				continue;
 		}
@@ -67,19 +67,17 @@ int main()
 
 	} while (command != 4);
 
-	//for (i = 0; i < stdnum; i++)
-		delete[] clas; // 엑세스 위반 떠버림
+	delete[] clas;
 
 	return 0;
 }
 
-
-inline void InputValue(int & temp)
+inline void InputValue(int& temp)
 {
 	cin >> temp;
 }
 
-inline void InputValue(string & temp)
+inline void InputValue(string& temp)
 {
 	getline(cin, temp);
 }

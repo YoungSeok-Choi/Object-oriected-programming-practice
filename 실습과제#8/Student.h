@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "Subject.h"
 
 using namespace std;
@@ -36,4 +37,5 @@ public:
 };
 
 #endif
+
 
